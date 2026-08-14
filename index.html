@@ -22,7 +22,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100dvh;overflow-x:hidden}
-.app{max-width:480px;margin:0 auto;padding-bottom:calc(74px + env(safe-area-inset-bottom))}
+.app{max-width:480px;margin:0 auto;padding-bottom:calc(80px + env(safe-area-inset-bottom))}
 .mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace}
 
 /* header */
@@ -35,10 +35,10 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,system-ui,sans-serif
 /* bottom nav */
 .nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
 .nav-inner{max-width:480px;margin:0 auto;display:flex}
-.nav-btn{flex:1;background:none;border:none;padding:9px 0 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:inherit;color:var(--dim)}
-.nav-btn.on{color:var(--green)}
-.nav-ico{font-size:18px;line-height:1}
-.nav-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.6px;font-weight:600;text-transform:uppercase}
+.nav-btn{flex:1;background:none;border:none;padding:10px 0 9px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;font-family:inherit;color:#7d7d8a;position:relative}
+.nav-btn.on .nav-ico{stroke:var(--green)}
+.nav-ico{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;pointer-events:none;display:block}
+.nav-lbl{font-family:'DM Sans',system-ui,sans-serif;font-size:11px;letter-spacing:.1px;font-weight:600;pointer-events:none;line-height:1}
 
 /* layout */
 .view{display:none;padding:18px 16px 8px}
@@ -160,8 +160,8 @@ textarea.f{resize:vertical;min-height:76px;line-height:1.5}
 .x{background:none;border:none;color:var(--dim);font-size:17px;cursor:pointer;padding:4px 2px;flex-shrink:0;font-family:inherit}
 .privacy{font-size:11px;color:var(--dim);text-align:center;line-height:1.6;padding:18px 8px 8px}
 
-.toast{position:fixed;bottom:calc(88px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(90px);background:var(--green-deep);color:#fff;padding:11px 22px;border-radius:24px;font-size:13px;font-weight:600;z-index:600;transition:transform .3s cubic-bezier(.175,.885,.32,1.275);pointer-events:none;white-space:nowrap}
-.toast.show{transform:translateX(-50%) translateY(0)}
+.toast{position:fixed;bottom:calc(96px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(16px);background:var(--green-deep);color:#fff;padding:11px 22px;border-radius:24px;font-size:13px;font-weight:600;z-index:600;transition:transform .28s cubic-bezier(.175,.885,.32,1.275),opacity .2s ease;pointer-events:none;white-space:nowrap;opacity:0;visibility:hidden}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
 </style>
 </head>
 <body>
@@ -184,11 +184,21 @@ textarea.f{resize:vertical;min-height:76px;line-height:1.5}
 </div>
 
 <nav class="nav"><div class="nav-inner">
-  <button class="nav-btn on" data-tab="dash"><span class="nav-ico">◈</span><span class="nav-lbl">Home</span></button>
-  <button class="nav-btn" data-tab="week"><span class="nav-ico">✓</span><span class="nav-lbl">Week</span></button>
-  <button class="nav-btn" data-tab="lhi"><span class="nav-ico">◉</span><span class="nav-lbl">LHI</span></button>
-  <button class="nav-btn" data-tab="hist"><span class="nav-ico">≡</span><span class="nav-lbl">Log</span></button>
-  <button class="nav-btn" data-tab="setup"><span class="nav-ico">⚙</span><span class="nav-lbl">Setup</span></button>
+  <button class="nav-btn on" data-tab="dash">
+    <svg class="nav-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 10 3l7 5.5V17H3z"/><path d="M8 17v-5h4v5"/></svg>
+    <span class="nav-lbl" style="color:#333;font-family:'DM Sans',system-ui,sans-serif;font-size:11px;font-weight:600;letter-spacing:0;text-transform:none;background:none;line-height:1">Home</span></button>
+  <button class="nav-btn" data-tab="week">
+    <svg class="nav-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="14" height="12.5" rx="2" fill="none"/><path d="M3 8.5h14M7 3v3M13 3v3"/><path d="m7.5 12.6 1.8 1.8 3.4-3.7"/></svg>
+    <span class="nav-lbl" style="color:#333;font-family:'DM Sans',system-ui,sans-serif;font-size:11px;font-weight:600;letter-spacing:0;text-transform:none;background:none;line-height:1">Week</span></button>
+  <button class="nav-btn" data-tab="lhi">
+    <svg class="nav-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16.5V11M10 16.5V4M16 16.5V8"/></svg>
+    <span class="nav-lbl" style="color:#333;font-family:'DM Sans',system-ui,sans-serif;font-size:11px;font-weight:600;letter-spacing:0;text-transform:none;background:none;line-height:1">LHI</span></button>
+  <button class="nav-btn" data-tab="hist">
+    <svg class="nav-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h12M4 10h12M4 14.5h8"/></svg>
+    <span class="nav-lbl" style="color:#333;font-family:'DM Sans',system-ui,sans-serif;font-size:11px;font-weight:600;letter-spacing:0;text-transform:none;background:none;line-height:1">Log</span></button>
+  <button class="nav-btn" data-tab="setup">
+    <svg class="nav-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h14M3 14h14"/><circle cx="7.5" cy="6" r="2.1" fill="none"/><circle cx="13" cy="14" r="2.1" fill="none"/></svg>
+    <span class="nav-lbl" style="color:#333;font-family:'DM Sans',system-ui,sans-serif;font-size:11px;font-weight:600;letter-spacing:0;text-transform:none;background:none;line-height:1">Setup</span></button>
 </div></nav>
 
 <div class="toast" id="toast"></div>
@@ -260,7 +270,18 @@ function parseKey(k){var p=k.split("-");return new Date(+p[0],+p[1]-1,+p[2])}
 function fmtShort(d){return d.toLocaleDateString("en-US",{month:"short",day:"numeric"})}
 function fmtFull(d){return d.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}
 function qOf(d){return "Q"+(Math.floor(d.getMonth()/3)+1)}
-function money(n){var v=Number(n)||0;var s=v<0?"-":"";return s+"$"+Math.abs(Math.round(v)).toLocaleString()}
+function money(n){
+  var v=Number(n)||0, neg=v<0; v=Math.abs(v);
+  var s=(v%1===0)?v.toLocaleString("en-US"):v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  return (neg?"\u2212":"")+"$"+s;
+}
+function parseMoney(raw){
+  if(raw==null)return NaN;
+  var t=String(raw).replace(/[$,\s]/g,"");
+  if(!/^-?\d*\.?\d+$/.test(t))return NaN;
+  var v=parseFloat(t);
+  return isNaN(v)?NaN:v;
+}
 
 var TODAY=new Date();
 var THIS_MON=mondayOf(TODAY);
@@ -307,7 +328,7 @@ function renderDash(){
     h+='<div class="stat"><div class="stat-lbl">Net Worth</div>'+
        '<div class="stat-val">'+money(latest.amount)+'</div>'+
        '<div class="stat-sub'+(delta==null?"":(delta>=0?" up":" down"))+'">'+
-       (delta==null?"as of "+fmtShort(parseKey(latest.date)):(delta>=0?"+":"\u2212")+money(Math.abs(delta)).replace("$","$")+" since "+fmtShort(parseKey(prev.date)))+
+       (delta==null?"as of "+fmtShort(parseKey(latest.date)):(delta>=0?"+":"\u2212")+money(Math.abs(delta))+" since "+fmtShort(parseKey(prev.date)))+
        '</div></div>';
   } else {
     h+='<div class="stat"><div class="stat-lbl">Net Worth</div><div class="stat-val" style="color:var(--line)">\u2014</div><div class="stat-sub">Add in Setup</div></div>';
@@ -539,9 +560,9 @@ function renderSetup(){
     });
     if(nw.length>4)h+='<div class="muted" style="padding:2px 4px 8px">'+(nw.length-4)+' more in your log</div>';
   }
-  h+='<div class="row"><input class="f" id="nwIn" type="number" inputmode="numeric" placeholder="Current net worth">'+
+  h+='<div class="row"><input class="f" id="nwIn" type="text" inputmode="decimal" autocomplete="off" placeholder="Current net worth">'+
      '<button class="btn btn-green btn-sm" data-act="addNW">Log</button></div>'+
-     '<div class="muted" style="padding:8px 4px 0">Log it whenever you feel like it. Each entry is dated so you can see the direction of travel.</div>';
+     '<div class="muted" style="padding:8px 4px 0">Decimals and commas are fine \u2014 1,250,000.50 works. Log it whenever you feel like it. Each entry is dated so you can see the direction of travel.</div>';
 
   h+='<div class="sec-l">Things you\u2019re tracking</div>';
   if(D.habits.length){
@@ -573,7 +594,7 @@ function renderSetup(){
      '<div style="height:14px"></div>'+
      '<button class="btn btn-ghost" style="color:var(--lo)" data-act="wipe">Erase everything</button>';
 
-  h+='<div class="privacy">Gobundance OS \u00b7 v1</div>';
+  h+='<div class="privacy">Gobundance OS \u00b7 build 7</div>';
   document.getElementById("v-setup").innerHTML=h;
 }
 
@@ -722,8 +743,8 @@ document.querySelector(".app").addEventListener("click",function(e){
   }
   if(d.delgoal){D.profile.goals=D.profile.goals.filter(function(g){return g.id!==d.delgoal});save();renderSetup();renderDash();return}
   if(d.act==="addNW"){
-    var ni=document.getElementById("nwIn"),nv=parseFloat(ni.value);
-    if(isNaN(nv)){toast("Enter a number");return}
+    var ni=document.getElementById("nwIn"),nv=parseMoney(ni.value);
+    if(isNaN(nv)){toast("Enter an amount, e.g. 1,250,000.50");return}
     var today=keyOf(new Date());
     D.netWorth=D.netWorth.filter(function(x){return x.date!==today});
     D.netWorth.push({date:today,amount:nv});
